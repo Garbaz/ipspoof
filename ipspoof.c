@@ -110,11 +110,13 @@ int main(int argc, char* argv[])
 	printf("done!\n");
 	
 	printf("Telling socket to send my packet without header...\n");
-	if (setsockopt(sockfd, IPPROTO_IP, IP_HDRINCL, &yes, sizeof(yes)) < 0)
+	if (setsockopt(sockfd, IPPROTO_IP, IP_HDRINCL, &yes, sizeof(yes)) < 0 ||
+	    setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, &yes, sizeof(yes)) < 0)
 	{
 		perror("setsockopt");
 		return 1;
 	}
+	
 	memset(&iaddr, 0, sizeof(iaddr));
 	
 	printf("done!\n");
