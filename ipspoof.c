@@ -38,7 +38,7 @@ char sbuffer[255], dbuffer[255];
 
 void interrupt_handler(int sig)
 {
-	printf(/*"C*/"leaning up and exiting...\n");
+	printf("|  Cleaning up and exiting...\n");
 	free(packet);
 	exit(0);
 }
@@ -86,7 +86,7 @@ int main(int argc, char* argv[])
 	
 	memcpy(packet, &ip_pkg, sizeof(ip_pkg));
 	
-	printf("done!\n");
+	printf(" done!\n");
 	
 	printf("Setting up ICMP part...\n");
 	
@@ -99,18 +99,19 @@ int main(int argc, char* argv[])
 	
 	memcpy(packet + 20, &icmp_pkg, 8);
 	
-	printf("done!\n");
+	printf(" done!\n");
 	
 	printf("Setting up socket...\n");
 	if((sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) < 0)
 	{
 		perror("socket");
+		fprintf(stderr, "\n(Are you root?)\n\n");
 		return 1;
 	}
-	printf("done!\n");
+	printf(" done!\n");
 	
-	printf("Telling socket to send my packet without header...\n");
-	if (setsockopt(sockfd, IPPROTO_IP, IP_HDRINCL, &yes, sizeof(yes)) < 0 ||
+	printf("Telling socket to send my packet without header & enable broadcasting...\n");
+	if (setsockopt(sockfd, IPPROTO_IP, IP_HDRINCL,   &yes, sizeof(yes)) < 0 ||
 	    setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, &yes, sizeof(yes)) < 0)
 	{
 		perror("setsockopt");
@@ -119,7 +120,7 @@ int main(int argc, char* argv[])
 	
 	memset(&iaddr, 0, sizeof(iaddr));
 	
-	printf("done!\n");
+	printf(" done!\n");
 	
 	iaddr.sin_family = AF_INET;
 	iaddr.sin_addr.s_addr = ip_pkg.ip_dst.s_addr;
