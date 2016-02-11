@@ -1,6 +1,6 @@
 # ipspoof DOS Tool
 
-### disclaimer
+### Disclaimer
 **What you do with this software is your thing and the resulting consequences are your problem!
 It's illegal to target this software at any computer/server you don't have the permisson to attack!**
 
