@@ -1,9 +1,9 @@
 # ipspoof DOS Tool
 
 ### Disclaimer
-**What you do with this software is your thing and the resulting consequences are your problem!
+**What you do with this software is your thing and the resulting consequences are your problem!**
 
-It's illegal to target this software at any computer/server you don't have the permisson to attack!**
+**It's illegal to target this software at any computer/server you don't have the permisson to attack!**
 
 ### What is this?
 This is a simple C program I wrote, which sends spoofed ICMP Echo requests over the network.
