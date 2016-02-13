@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
 	if((sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) < 0)
 	{
 		perror("socket");
-		fprintf(stderr, "\n(Are you root?)\n\n");
+		fprintf(stderr, "\n(You have to run as root to use raw sockets...)\n\n");
 		return 1;
 	}
 	printf(" done!\n");
