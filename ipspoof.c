@@ -34,7 +34,7 @@ struct sockaddr_in iaddr;
 u_char *packet;
 struct sigaction sa;
 
-char sbuffer[255], dbuffer[255];
+char sbuffer[32], dbuffer[32];
 
 void interrupt_handler(int sig)
 {
@@ -45,18 +45,26 @@ void interrupt_handler(int sig)
 
 int main(int argc, char* argv[])
 {
-	if(argc != 3)
+	if(argc >= 2)
 	{
-		printf("\nUsage: \"%s SOURCEADDR DESTADDR\"\n\nRunning in interactive mode...\n", argv[0]);
+		strcpy(sbuffer, argv[1]);
+		
+		if(argc == 2)
+		{
+			strcpy(dbuffer, "255.255.255.255");
+		}
+		else
+		{
+			strcpy(dbuffer, argv[2]);
+		}
+	}
+	else
+	{
+		printf("\nUsage: \"%s SOURCEADDR [DESTADDR]\" (DESTADDR default: 255.255.255.255)\n\nRunning in interactive mode...\n", argv[0]);
 		printf("Source host address: ");
 		scanf("%s", sbuffer);
 		printf("Destination host address: ");
 		scanf("%s", dbuffer);
-	}
-	else
-	{
-		strcpy(sbuffer, argv[1]);
-		strcpy(dbuffer, argv[2]);
 	}
 	
 	sa.sa_handler = interrupt_handler;
@@ -85,7 +93,6 @@ int main(int argc, char* argv[])
 	ip_pkg.ip_sum = in_cksum((unsigned short *)&ip_pkg, sizeof(ip_pkg));
 	
 	memcpy(packet, &ip_pkg, sizeof(ip_pkg));
-	
 	printf(" done!\n");
 	
 	printf("Setting up ICMP part...\n");
