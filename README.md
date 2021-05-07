@@ -8,6 +8,6 @@
 ### What is this?
 This is a simple C program I wrote, which sends spoofed ICMP Echo requests over the network.
 
-Setting the destination address to a broadcast address (e.g. 255.255.255.255) and the "source" address to a target computer, one can use the power of all PCs in a network to DOS a single target.
+Setting the destination address to a broadcast address (e.g. 255.255.255.255) and the "source" address to a target computer, one can use the power of all PCs in a network to DOS a single target. **WARNING: This actually is quite powerful, and will likely crash something, like a router, along the line so do not use this in a real network!**
 
-For further information search for "Smurf DOS".
+For further information search for "Smurf DOS". The idea is not mine, this is just an implementation.
